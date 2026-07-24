@@ -1,0 +1,105 @@
+<div class="container mt-4">
+
+    <div class="row mb-3">
+
+        <div class="col-md-8">
+
+            <input type="text" class="form-control" placeholder="Search Student or Examyear......" [(ngModel)]="searchTerm"
+                (ngModelChange)="page=1">
+
+        </div>
+
+        <div class="col-md-4 text-end">
+
+            <button class="btn btn-primary" routerLink="/exam/add">
+
+                <i class="fa fa-plus"></i>
+
+                Add Exam
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+
+            <tr>
+
+                <th>Student</th>
+
+                <th>Exam Year</th>
+
+                <th>Total Mark</th>
+
+                <th>Result</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let exam of exams()
+                | filterExam:searchTerm
+                | paginate:{itemsPerPage:itemsPerPage,currentPage:page}">
+
+                <td>{{exam.studentName}}</td>
+
+                <td>{{exam.examYear}}</td>
+
+                <td>{{exam.totalMark}}</td>
+
+                <td>
+
+                    <span class="badge bg-success" *ngIf="exam.passOrFail=='PASS'">
+
+                        PASS
+
+                    </span>
+
+                    <span class="badge bg-danger" *ngIf="exam.passOrFail=='FAIL'">
+
+                        FAIL
+
+                    </span>
+
+                </td>
+
+
+
+                <td>
+
+                    <button class="btn btn-sm btn-info me-2" (click)="editExam(exam.masterId)">
+
+                        <i class="fa fa-edit">Edit</i>
+
+                    </button>
+
+
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    
+
+    <div class="d-flex justify-content-center">
+
+        <pagination-controls (pageChange)="page=$event">
+
+        </pagination-controls>
+
+    </div>
+
+</div>

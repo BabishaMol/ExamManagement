@@ -1,0 +1,248 @@
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h4>Edit Exam</h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Backend Validation -->
+            <div class="alert alert-danger" *ngIf="errorMessage()">
+                {{ errorMessage() }}
+            </div>
+
+            <form [formGroup]="examForm" (ngSubmit)="updateExam()">
+
+                <!-- Student -->
+                <div class="mb-3">
+
+                    <label class="form-label">Student</label>
+
+                    <select class="form-control" formControlName="studentId">
+
+                        <option value="">--Select Student--</option>
+
+                        <option *ngFor="let student of students()" [value]="student.studentId">
+
+                            {{ student.studentName }}
+
+                        </option>
+
+                    </select>
+
+                    <span class="text-danger" *ngIf="examForm.get('studentId')?.touched &&
+                                 examForm.get('studentId')?.errors?.['required']">
+
+                        Student is required.
+
+                    </span>
+
+                </div>
+
+                <!-- Exam Year -->
+                <div class="mb-3">
+
+                    <label class="form-label">Exam Year</label>
+
+                    <input type="number" class="form-control" formControlName="examYear">
+
+                    <span class="text-danger" *ngIf="examForm.get('examYear')?.touched &&
+                                 examForm.get('examYear')?.errors?.['required']">
+
+                        Exam Year is required.
+
+                    </span>
+
+                    <span class="text-danger" *ngIf="examForm.get('examYear')?.errors?.['max']">
+
+                        Future year is not allowed.
+
+                    </span>
+
+
+                </div>
+
+                <hr>
+
+                <h5>Subjects</h5>
+
+                <div formArrayName="examDtls">
+
+                    <table class="table table-bordered">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>Subject</th>
+
+                                <th>Marks</th>
+
+                                <th width="120">Action</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let item of examDtls.controls; let i=index" [formGroupName]="i">
+
+                                <!-- Subject -->
+                                <td>
+
+                                    <select class="form-control" formControlName="subjectId">
+
+                                        <option value="">--Select Subject--</option>
+
+                                        <option *ngFor="let subject of availableSubjects(i)"
+                                            [value]="subject.subjectId">
+
+                                            {{subject.subjectName}}
+
+                                        </option>
+
+                                    </select>
+
+                                    <span class="text-danger" *ngIf="item.get('subjectId')?.touched &&
+                                                 item.get('subjectId')?.errors?.['required']">
+
+                                        Subject is required.
+
+                                    </span>
+
+                                </td>
+
+                                <!-- Marks -->
+                                <td>
+
+                                    <input type="number" class="form-control" formControlName="marks"
+                                        (keyup)="calculateTotal()" (change)="calculateTotal()">
+
+                                    <span class="text-danger" *ngIf="item.get('marks')?.touched &&
+                                                 item.get('marks')?.errors?.['required']">
+
+                                        Marks are required.
+
+                                    </span>
+
+                                    <span class="text-danger" *ngIf="item.get('marks')?.errors?.['min']">
+
+                                        Marks cannot be less than 0.
+
+                                    </span>
+
+                                    <span class="text-danger" *ngIf="item.get('marks')?.errors?.['max']">
+
+                                        Marks cannot exceed 100.
+
+                                    </span>
+
+                                </td>
+
+                                <!-- Delete -->
+                                <td>
+
+                                    <button type="button" class="btn btn-danger" (click)="removeSubject(i)"
+                                        *ngIf="examDtls.length > 1">
+
+                                        <i class="fa fa-trash"></i>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- Add Subject -->
+                <div class="mb-3">
+
+                    <button type="button" class="btn btn-success" (click)="addSubject()">
+
+                        <i class="fa fa-plus"></i>
+                        Add Subject
+
+                    </button>
+
+                </div>
+
+                <hr>
+
+                <!-- Total & Result -->
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <h5>
+
+                            Total Marks :
+
+                            <span class="text-primary">
+
+                                {{ totalMark() }}
+
+                            </span>
+
+                        </h5>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <h5>
+
+                            Result :
+
+                            <span class="badge bg-success" *ngIf="passOrFail()=='PASS'">
+
+                                PASS
+
+                            </span>
+
+                            <span class="badge bg-danger" *ngIf="passOrFail()=='FAIL'">
+
+                                FAIL
+
+                            </span>
+
+                        </h5>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- Buttons -->
+                <div class="text-center">
+
+                    <button type="submit" class="btn btn-warning me-2" [disabled]="examForm.invalid">
+
+                        <i class="fa fa-edit"></i>
+                        Update
+
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" routerLink="/exam/list">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

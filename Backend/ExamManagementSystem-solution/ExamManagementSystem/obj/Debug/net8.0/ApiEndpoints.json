@@ -1,0 +1,117 @@
+[
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "AddExam",
+    "RelativePath": "api/Exams/AddExam",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ExamManagementSystem.DTOs.ExamMasterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "DeleteSubject",
+    "RelativePath": "api/Exams/DeleteSubject/{dtlsId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dtlsId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "GetExamById",
+    "RelativePath": "api/Exams/GetExamById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "GetExamList",
+    "RelativePath": "api/Exams/GetExamList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "GetStudents",
+    "RelativePath": "api/Exams/GetStudents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "GetSubjects",
+    "RelativePath": "api/Exams/GetSubjects",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.ExamsController",
+    "Method": "UpdateExam",
+    "RelativePath": "api/Exams/UpdateExam",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ExamManagementSystem.DTOs.ExamMasterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExamManagementSystem.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ExamManagementSystem.WeatherForecast, ExamManagementSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]
